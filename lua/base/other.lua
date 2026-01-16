@@ -1,23 +1,33 @@
+-- set local variables
 local opt = vim.opt
 local g = vim.g
 
---[[ Настройка панелей ]]--
--- Вертикальные сплиты становятся справа
--- По умолчанию панели в Neovim ставятся в зависимости от расположения текущей панели. Данная настройка поможет нам держать панели в порядке
-opt.splitright = true
+-- [[ DEFAULT ]]
 
--- Горизонтальные сплиты становятся снизу
+-- off default file manager
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+opt.clipboard = 'unnamedplus'
+opt.fixeol = false -- off end-file completion 
+opt.completeopt = 'menuone,noselect' -- autocomplete 
+opt.swapfile = false -- off swapfile
+opt.number = true
+opt.relativenumber = true
+
+-- set leader key
+g.mapleader = ' '
+g.maplocalleader = ','
+
+-- [[ SPLITS ]] 
+opt.splitright = true
 opt.splitbelow = true
 
---[[ Дополнительные настройки ]]--
--- Используем системный буфер обмена
-opt.clipboard = 'unnamedplus'
+-- [[ OTHER ]]
+vim.cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]] -- off autocomment when go to new line
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, { -- use codelens
+  callback = function()
+    vim.lsp.codelens.refresh()
+  end
+})
 
--- Отключаем дополнение файлов в конце
-opt.fixeol = false
 
--- Автодополнение (встроенное в Neovim)
-opt.completeopt = 'menuone,noselect'
-
--- Не автокомментировать новые линии при переходе на новую строку
-vim.cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]

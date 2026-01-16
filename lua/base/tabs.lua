@@ -1,8 +1,8 @@
+-- set local variables
 local opt = vim.opt
-local g = vim.g
 
 -- [[ TABS SETTINGS ]]
-
-opt.shiftwidth = 2 -- количество пробельных символов
-opt.tabstop = 2 -- количество табов, 1 таб = 2 пробела
-opt.smartindent = true -- подстраивать новые строки под прошлый отступ
+opt.shiftwidth = 4 -- amount spaces
+opt.tabstop = 2 -- amount tabs 
+opt.smartindent = true
+opt.expandtab = true
